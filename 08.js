@@ -53,9 +53,6 @@ function snailSquare(side) {
 
 function repeatFn(quantity, shouldContinue, fn) {
 	for (let i = 0; shouldContinue(i) && i < quantity; ++i) {
-		if (!shouldContinue(i)) {
-			console.log("repeatFn".repeat(20));
-		}
 		fn(i);
 	}
 }
