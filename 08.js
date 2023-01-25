@@ -11,7 +11,7 @@ function snailSquare(side) {
 	const square = [];
 	const shouldContinue = () => value <= lastValue;
 	while (shouldContinue()) {
-		repeatFn(limit, shouldContinue, () => {
+		repeatFn(limit, () => {
 			square[index] = value;
 			index++;
 			value += 2;
@@ -21,7 +21,7 @@ function snailSquare(side) {
 		}
 		--limit;
 		--index;
-		repeatFn(limit, shouldContinue, () => {
+		repeatFn(limit, () => {
 			index += side;
 			square[index] = value;
 			value += 2;
@@ -29,7 +29,7 @@ function snailSquare(side) {
 		if (!shouldContinue()) {
 			break;
 		}
-		repeatFn(limit, shouldContinue, () => {
+		repeatFn(limit, () => {
 			--index;
 			square[index] = value;
 			value += 2;
@@ -38,7 +38,7 @@ function snailSquare(side) {
 			break;
 		}
 		--limit;
-		repeatFn(limit, shouldContinue, () => {
+		repeatFn(limit, () => {
 			index -= side;
 			square[index] = value;
 			value += 2;
@@ -51,8 +51,8 @@ function snailSquare(side) {
 	return square;
 }
 
-function repeatFn(quantity, shouldContinue, fn) {
-	for (let i = 0; shouldContinue(i) && i < quantity; ++i) {
+function repeatFn(quantity, fn) {
+	for (let i = 0; i < quantity; ++i) {
 		fn(i);
 	}
 }
