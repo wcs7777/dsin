@@ -14,14 +14,14 @@ Object
 	});
 
 function decompose(value, factors) {
-	const decomposed = notes.reduce((obj, note) => {
+	const decomposed = factors.reduce((obj, factor) => {
 		return {
-			[note]: 0,
+			[factor]: 0,
 			...obj,
 		};
 	}, {});
 	let remainder = value;
-	for (const factor of factors.sort(reverseSortNotes)) {
+	for (const factor of factors.sort(reverseSortFactors)) {
 		while (remainder - factor >= 0) {
 			decomposed[factor]++;
 			remainder -= factor;
@@ -30,10 +30,10 @@ function decompose(value, factors) {
 	return decomposed;
 }
 
-function reverseSortNotes(left, right) {
+function reverseSortFactors(left, right) {
 	return left > right ? -1 : right > left ? 1 : 0;
 }
 
 function reverseSortDecomposed([left], [right]) {
-	return reverseSortNotes(parseInt(left), parseInt(right));
+	return reverseSortFactors(parseInt(left), parseInt(right));
 }
