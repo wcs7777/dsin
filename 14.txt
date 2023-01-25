@@ -1,0 +1,8 @@
+a)
+Primeiramente iria verificar se os clientes cadastraram corretamente os produtos.
+Depois verificaria se os os campos categoria e grupo do produto não estão nulos no banco de dados, e caso estiverem pedir para que os clientes informê-os.
+Caso estiverem corretos, iria verificar se as últimas alterações no sistema foram a causa dessa divergência, tendo maior foco na desobrigatoriedade dos campos códigoa da categoria e grupo do produto.
+
+b)
+O possível diagnóstico são campos nulos, impossibilitando a correlação.
+Tomaria a ação de, se possível, mudar a lógica dos relatórios, e, caso não seja possível, desfazer essas mudanças para o sistema ficar consistente novamente.
