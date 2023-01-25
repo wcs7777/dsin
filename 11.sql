@@ -5,8 +5,8 @@ SELECT
 FROM
 	cdclicodigo AS c
 INNER JOIN
-	lcatendimento AS l ON c.cdclicodigo = l.lcacliente
+	lcatendimento AS a ON c.cdclicodigo = a.lcacliente
 INNER JOIN
-	cdfuncionario AS f ON f.cdfcodigo = l.lcafuncionario
+	cdfuncionario AS f ON f.cdfcodigo = a.lcafuncionario
 ORDER BY
 	c.cdclinome;
