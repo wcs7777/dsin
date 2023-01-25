@@ -9,48 +9,44 @@ function format(
 ) {
 	const titleIsGreater = title.length > subtitle.length;
 	const maxLength = Math.max(title.length, subtitle.length);
-	const lesserSectionPadding = (
-		(maxLength - Math.min(title.length, subtitle.length)) / 2 + padding
+	const paddings = " ".repeat(padding);
+	const ornaments = ornament.repeat(ornamentQuantity);
+	const lesserSectionPaddingLength = (
+		(maxLength - Math.min(title.length, subtitle.length)) / 2
 	);
-	const nonSectionLength = maxLength + padding * 2;
-	const formatted = [];
-	formatted.push(
-		surroundOrnament(
-			ornament.repeat(nonSectionLength), ornament, ornamentQuantity
-		)
+	const leftLesserSectionPadding = (
+		" ".repeat(lesserSectionPaddingLength) +
+		paddings +
+		""
 	);
-	formatted.push(
-		surroundOrnament(" ".repeat(nonSectionLength), ornament, ornamentQuantity)
+	const rightLesserSectionPadding = (
+		leftLesserSectionPadding +
+		(Number.isInteger(lesserSectionPaddingLength) ? "" : " ") +
+		""
 	);
-	formatted.push(surroundOrnament(
-		surroundOrnament(
-			title,
-			" ",
-			titleIsGreater ? padding : lesserSectionPadding
+	const border = ornament.repeat(maxLength + padding * 2);
+	const space = paddings + " ".repeat(maxLength) + paddings;
+	return [
+		border,
+		space,
+		(
+			titleIsGreater ?
+			surroundWith(title, paddings) :
+			leftLesserSectionPadding + title + rightLesserSectionPadding
 		),
-		ornament,
-		ornamentQuantity,
-	));
-	formatted.push(surroundOrnament(
-		surroundOrnament(
-			subtitle,
-			" ",
-			titleIsGreater ? lesserSectionPadding : padding
+		(
+			titleIsGreater ?
+			leftLesserSectionPadding + subtitle + rightLesserSectionPadding :
+			surroundWith(subtitle, paddings)
 		),
-		ornament,
-		ornamentQuantity,
-	));
-	formatted.push(
-		surroundOrnament(" ".repeat(nonSectionLength), ornament, ornamentQuantity)
-	);
-	formatted.push(
-		surroundOrnament(
-			ornament.repeat(nonSectionLength), ornament, ornamentQuantity
-		)
-	);
-	return formatted.join("\n");
+		space,
+		border,
+	]
+		.map((line) => ornaments + line + ornaments)
+		.join("\n");
 }
 
-function surroundOrnament(text, ornament, quantity=2) {
-	return ornament.repeat(quantity) + text + ornament.repeat(quantity);
+function surroundWith(text, surroundText, quantity=1) {
+	const border = surroundText.repeat(quantity);
+	return border + text + border;
 }
